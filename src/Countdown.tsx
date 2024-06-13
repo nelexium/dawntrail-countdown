@@ -1,10 +1,16 @@
-import {Duration, intervalToDuration} from "date-fns";
-import {useEffect, useState} from "react";
+import { Duration, intervalToDuration } from "date-fns";
+import { useEffect, useState } from "react";
 
-export default function Countdown(){
-  const dawntrailRelease = new Date(2024, 7, 2);
+interface Props {
+  type: boolean;
+}
+
+export default function Countdown({ type }: Props) {
+  const dawntrailRelease = new Date(2024, 7, 2, 7, 30);
 
   let diff: Duration;
+
+  const offset = dawntrailRelease.getTimezoneOffset();
 
   const [days, setDays] = useState<number>();
   const [hours, setHours] = useState<number>();
@@ -12,22 +18,27 @@ export default function Countdown(){
   const [seconds, setSeconds] = useState<number>();
 
   useEffect(() => {
+    if (!type) {
+      dawntrailRelease.setUTCFullYear(2024, 7, 2); //full release
+    } else {
+      dawntrailRelease.setUTCFullYear(2024, 6, 28); //early access
+    }
+
     const interval = setInterval(() => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       diff = intervalToDuration({
-        start: new Date().getTime(),
+        start: new Date().getTime() + offset * 60000,
         end: dawntrailRelease,
-      })
+      });
 
       setDays(diff.days == undefined ? 0 : diff.days);
       setHours(diff.hours == undefined ? 0 : diff.hours);
       setMinutes(diff.minutes == undefined ? 0 : diff.minutes);
       setSeconds(diff.seconds == undefined ? 0 : diff.seconds);
-
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [type]);
 
   return (
     <div className={"countdown-component"}>
@@ -59,5 +70,5 @@ export default function Countdown(){
         </div>
       </div>
     </div>
-  )
+  );
 }
