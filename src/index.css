@@ -1,0 +1,80 @@
+body{
+    background-color: #1e1e1e;
+    color: rgb(255, 242, 177);
+
+    font-family: "Red Rose", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+    overflow: hidden;
+
+    margin: 0;
+}
+
+.App{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.hero{
+    display: flex;
+    justify-content: center;
+
+    img{
+        width: 60vh;
+    }
+
+    h1{
+        margin: 0;
+        display: flex;
+        align-items: center;
+        padding-top: 8%;
+    }
+}
+
+.contents{
+    width: 100%;
+    background: rgb(48,48,48);
+    background: radial-gradient(circle, rgba(48,48,48,1) 50%, rgba(255,255,255,0) 100%);
+    padding: 1em 0 1em 0;
+}
+
+.countdown-component{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .countdown-labels{
+        display: flex;
+        flex-direction: row;
+
+        .label{
+            margin: .5em;
+            padding: .5em;
+            background-color: #252525;
+            border-radius: 1em;
+
+            h2{
+                background-color: #303030;
+                padding: .5em;
+                margin: 0;
+                border-radius: .5em;
+            }
+
+            h1{
+                text-align: center;
+            }
+        }
+
+        .divider{
+            display: flex;
+            align-items: center;
+            h1{
+                margin-top: 2.2em;
+            }
+        }
+    }
+}
